@@ -18,4 +18,5 @@ void free_av(char **av);
 void run_shell(bool mode, char *prompt, char **argv, char **envp);
 void exit_on_alloc_fail(void *block, int status);
 void check_command(char **av);
+void exec_cmd(char **av, char **envp);
 #endif /* _SHELL_UTILS_H */
