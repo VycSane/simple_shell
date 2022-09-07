@@ -32,9 +32,9 @@ void print_prompt(char *str, bool shell_mode)
 	if (str != NULL)
 		prompt_text = str;
 	else if (shell_mode)
-		prompt_text = "\033[0;34m($)\033[0;0m ";
+		prompt_text = "($) ";
 	else if (!shell_mode)
-		prompt_text = "\033[0;34m$\033[0;0m ";
+		prompt_text = "$ ";
 
 	/* Prints the prompt text to the standard output */
 	print(prompt_text, STDOUT_FILENO);
@@ -102,7 +102,7 @@ char **str_av(char *str, char *delimiter)
 {
 	bool start = false;
 	char **av = NULL, *temp_str;
-	size_t i = 0, start_pos = 0, stop_pos = 0, curr_pos = 0, ptr = 0, str_len;
+	size_t i = 0, start_pos = 0, stop_pos = 0, curr_pos, ptr = 0, str_len;
 	ssize_t count = 0;
 
 	str_len = _strlen(str);
