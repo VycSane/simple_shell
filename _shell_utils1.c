@@ -51,8 +51,7 @@ void free_av(char **av)
 void check_command(char **av)
 {
 	ssize_t count;
-	char *cmd_cpy1, *cmd;
-	char **path_env, *paths_str, *path;
+	char *cmd_cpy1, *cmd, **path_env, *paths_str, *path;
 	size_t i = 0, size = 100;
 	int mode = F_OK, accessible;
 
@@ -102,8 +101,8 @@ void check_command(char **av)
  */
 void run_shell(bool shell_mode, char *prompt, char **argv, char **envp)
 {
-	char **av = NULL, *command;
-	pid_t cpid;
+	char **av = NULL;
+	int exist;
 
 	while (true)
 	{
@@ -117,21 +116,39 @@ void run_shell(bool shell_mode, char *prompt, char **argv, char **envp)
 		if (av == NULL)
 			continue;
 		check_command(av);
-		command = av[0];
-		cpid = fork();
-		if (cpid == 0)
+		exist = access(av[0], F_OK | X_OK);
+		if (exist == -1)
 		{
-			execve(command, av, envp);
 			perror(argv[0]);
-			if (!shell_mode)
-				break;
-		}
-		else
-		{
-			wait(NULL);
 			free_av(av);
-			if (!shell_mode)
+			if (shell_mode)
+				continue;
+			else
 				break;
 		}
+		exec_cmd(av, envp);
+		if (!shell_mode)
+			break;
+	}
+}
+
+/**
+ * exec_cmd - exectes a command
+ * @av: array of command and its arguments
+ * @envp: the list of environment variables
+ */
+void exec_cmd(char **av, char **envp)
+{
+	pid_t cpid;
+
+	cpid = fork();
+	if (cpid == 0)
+	{
+		execve(av[0], av, envp);
+	}
+	else
+	{
+		wait(NULL);
+		free_av(av);
 	}
 }
