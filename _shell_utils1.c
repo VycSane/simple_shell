@@ -116,6 +116,8 @@ void run_shell(bool shell_mode, char *prompt, char **argv, char **envp)
 		if (av == NULL)
 			continue;
 		check_command(av);
+		if (_strcmp(av[0], "exit") == 0)
+			exit(0);
 		exist = access(av[0], F_OK | X_OK);
 		if (exist == -1)
 		{
