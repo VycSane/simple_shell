@@ -13,17 +13,12 @@
 
 int main(int argc, char **argv, char **envp)
 {
-	char *CLEAR_SCREEN_ANSI;
-
 	/* Execute the file without any argument */
 	if (argc != 1)
 	{
 		print("Usage: simple_shell\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	CLEAR_SCREEN_ANSI = "\033[1;1H\033[2J";
-
-	print(CLEAR_SCREEN_ANSI, STDOUT_FILENO);
 	while (true)
 	{
 		/* shell currnet mode (interactive (true), non interactive(false)) */
