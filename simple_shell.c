@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **envp)
 		/* shell currnet mode (interactive (true), non interactive(false)) */
 		bool shell_current_mode = shell_mode(STDIN_FILENO);
 		/* Run shell in the specified shellmode */
-		run_shell(shell_current_mode, NULL, argv, envp);
+		run_shell(shell_current_mode, argv, envp);
 		return (0);
 	}
 }
