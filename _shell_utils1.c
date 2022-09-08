@@ -99,7 +99,7 @@ void check_command(char **av)
  * @argv: commandline argument
  * @envp: the shell environment list
  */
-void run_shell(bool shell_mode, char *prompt, char **argv, char **envp)
+void run_shell(bool shell_mode, char **argv, char **envp)
 {
 	char **av = NULL;
 	int exist;
