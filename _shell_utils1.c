@@ -95,7 +95,6 @@ void check_command(char **av)
 /**
  * run_shell - runs a command from stdin in the specified shell mode
  * @shell_mode: the shell mode (interactive (true), non interactive (false))
- * @prompt: The text to display as prompt, NULL (uses default prompt)
  * @argv: commandline argument
  * @envp: the shell environment list
  */
