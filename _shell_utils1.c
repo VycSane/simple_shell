@@ -106,10 +106,6 @@ void run_shell(bool shell_mode, char *prompt, char **argv, char **envp)
 
 	while (true)
 	{
-		if (shell_mode)
-			print_prompt(prompt, shell_mode);
-		else
-			print_prompt(prompt, shell_mode);
 		av = generate_command();
 		if (av == NULL && !shell_mode)
 			break;
